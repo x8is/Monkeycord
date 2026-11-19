@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Monkeycord</title>
+    <meta name="description" content="A minimalist guitar speed trainer that listens through your microphone: chords per minute, fretboard recall, notes per minute and sight-reading." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2317191d'/%3E%3Cg stroke='%23f2a541' stroke-width='2'%3E%3Cpath d='M9 6v20M14 6v20M19 6v20M24 6v20'/%3E%3C/g%3E%3Ccircle cx='14' cy='13' r='3.2' fill='%23f2a541'/%3E%3Ccircle cx='19' cy='19' r='3.2' fill='%23f2a541'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Music&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="top">
+        <a class="logo" href="#chords" aria-label="Monkeycord home"><span class="logo-mark" aria-hidden="true"></span>monkey<span>cord</span></a>
+        <nav class="modes" role="tablist" aria-label="Training mode">
+          <button type="button" role="tab" data-mode="chords">chords</button>
+          <button type="button" role="tab" data-mode="fretboard">fretboard</button>
+          <button type="button" role="tab" data-mode="npm">notes</button>
+          <button type="button" role="tab" data-mode="sight">sight-read</button>
+          <button type="button" role="tab" data-mode="tuner">tuner</button>
+        </nav>
+        <div class="input-ctl">
+          <button type="button" class="source" id="sourceBtn">not listening</button>
+          <div class="meter" title="input level (flashes on each strum/pluck)"><div class="meter-fill"></div></div>
+          <button type="button" class="icon-btn" id="settingsBtn" aria-label="Settings" title="settings">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3h-4l-.4 2.6c-.6.3-1.2.6-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1c.5.4 1.1.7 1.7 1L11 21h4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.5L19.4 13ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" transform="translate(-1 0)"/></svg>
+          </button>
+          <div class="popover" id="settings" hidden></div>
+        </div>
+      </header>
+
+      <div class="config" id="config"></div>
+      <div class="config extra" id="configExtra"></div>
+
+      <main class="stage" id="stage"></main>
+
+      <section class="debug" id="debug" hidden aria-label="Detector view"></section>
+
+      <footer class="foot">
+        <span><kbd>tab</kbd> restart</span>
+        <span><kbd>space</kbd> skip</span>
+        <span><kbd>`</kbd> detector view</span>
+        <span id="simHints" hidden>
+          <kbd>enter</kbd> play it · <kbd>x</kbd> play a wrong one ·
+          <button type="button" class="pill small" id="botBtn">bot: off</button>
+        </span>
+      </footer>
+    </div>
+
+    <div class="overlay" id="startOverlay">
+      <div class="start-card">
+        <div class="start-logo"><span class="logo-mark big" aria-hidden="true"></span>monkey<span>cord</span></div>
+        <p class="start-tag">A speed trainer that listens to your guitar.<br />Chords per minute, fretboard recall, notes per minute and sight-reading.</p>
+        <div class="start-actions">
+          <button type="button" id="useMic" class="btn primary">use microphone</button>
+          <button type="button" id="useSim" class="btn">try a simulated guitar</button>
+        </div>
+        <p class="start-small">Works best with headphones or a quiet room. Audio is analysed locally in your browser; nothing is recorded or uploaded.</p>
+        <p class="start-error" id="micError" role="alert"></p>
+      </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
